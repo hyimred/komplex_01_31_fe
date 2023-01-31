@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
   interface State {
     Screws: Screw[];
   }
@@ -39,7 +41,7 @@ import './App.css';
       }
     
       async handleDelete(id: number) {
-            let response = await fetch('http://localhost:3000/api/tarhely/' + id, {
+            let response = await fetch('http://localhost:3000/csavar/' + id, {
               method: 'DELETE'
             });
             await this.loadScrews();
@@ -47,55 +49,34 @@ import './App.css';
       };
     
       render() {
-        return <div className='container'>
-          <h2>Tárhelyek</h2>
-          <div className="row d-flex flex-row m-2">
-          {this.state.Screws.map(Screws => <div className="col-md-4 col-sm-12 bg-primary p-2 text-center border border-dark">
-                                                  <h4 className="text-white">{Screws.típus}</h4>
-                                                  <p className="text-white">{Screws.hossz}</p>
-                                                  <p className="text-white">{Screws.készlet}</p>
-                                                  <p className="text-white">{Screws.ár}</p>
-                                                  <button className='btn btn-danger btn-sm' onClick={() => this.handleDelete(Screws.id)}>Törlés</button>
-                                              </div>)}  
-          </div>
-    
-          <h2>Új Tárhely</h2>
-    
-          <form>
-    
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">Tárhely neve:</span>
-              </div>
-              <input type="text" className="form-control" ></input>
-            </div>
-    
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">Tárhely mérete:</span>
-              </div>
-              <input type="text" className="form-control" ></input>
-            </div>
-    
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">Tárhely ára:</span>
-              </div>
-              <input type="text" className="form-control" ></input>
-            </div>
-    
-            <div className="input-group mb-3">
-              <div className="input-group-prepend">
-                <span className="input-group-text">Tárhely tipusa:</span>
-              </div>
-              <input type="text" className="form-control" ></input>
-            </div>
-            
-            <button className='btn btn-outline-primary' >Új Tárhely</button>
-    
-          </form>
+          return <div className="container-fluid App text-white bg-dark">
+                  <h2>Csavar Webáruház</h2>          
+                  <table className="table table-dark table-hover">
+                    <thead>
+                      <tr>
+                        <th>Típus</th>
+                        <th>Hossz</th>
+                        <th>Készlet</th>
+                        <th>Ár</th>
+                        <th>Megrendelés</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.Screws.map(Screws => <tr>
+                                                      <td>{Screws.típus}</td>
+                                                      <td>{Screws.hossz}</td>
+                                                      <td>{Screws.készlet}</td>
+                                                      <td>{Screws.ár}</td>
+                                                      <td width={1}>
+                                                        <button className='btn btn-danger btn-sm' >Kosárba</button>
+                                                      </td>
+                                                    </tr>)}  
+                      
+                    </tbody>
+                  </table>
+                </div>
           
-        </div >;
+        ;
       }
     }
   
