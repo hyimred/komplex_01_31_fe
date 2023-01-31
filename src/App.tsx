@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
   interface State {
     Screws: Screw[];
   }
@@ -58,7 +60,7 @@ import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
                         <th>Hossz</th>
                         <th>Készlet</th>
                         <th>Ár</th>
-                        <th>Megrendelés</th>
+                        <th>Törlés</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -68,13 +70,14 @@ import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
                                                       <td>{Screws.készlet}</td>
                                                       <td>{Screws.ár}</td>
                                                       <td width={1}>
-                                                        <button className='btn btn-danger btn-sm' >Kosárba</button>
+                                                        <button className='btn btn-danger btn-sm' onClick={() => this.handleDelete(Screws.id)}><FontAwesomeIcon icon={faTrash} /></button>
                                                       </td>
                                                     </tr>)}  
                       
                     </tbody>
                   </table>
                 </div>
+                
           
         ;
       }
